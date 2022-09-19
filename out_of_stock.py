@@ -18,14 +18,18 @@ print(driver.title)
 # el = driver.find_element_by_class_name("rf-productlocator-buttontitle")
 buttons = driver.find_element(By.XPATH,'//button[@class="rf-pickup-quote-overlay-trigger as-buttonlink"]')
 driver.execute_script("arguments[0].click();", buttons)
-time.sleep(5)
+time.sleep(2)
+f = driver.find_element(By.XPATH,'//input[@class="form-textbox-input rf-productlocator-form-textinput"]')
+f.send_keys("10220")
+f.send_keys(Keys.ENTER)
+time.sleep(2)
 el = driver.find_element(By.XPATH, '//span[@class="rf-productlocator-buttontitle"]')
 # search_box.send_keys('ChromeDriver')
 
 # search_box.submit()
 str = el.text 
 print(str)
-if(str.find("Currently unavailable.") != -1):
+if(str.find("ไม่มีจำหน่ายที่ร้าน 2 ที่ใกล้ที่สุดวันนี้") != -1):
     print("It's still not available my guy")
 # else: 
     #client.messages.create(to = "+xxxxxxxxxxxx", from_ = "+xxxxxxxxxxxx", body = "its available")      
