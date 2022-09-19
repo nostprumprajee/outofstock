@@ -1,7 +1,9 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 
 #from twilio.rest import Client
 
@@ -13,13 +15,16 @@ driver.get("https://www.apple.com/th/shop/buy-iphone/iphone-14-pro/%E0%B8%88%E0%
 
 print(driver.title)
 # el = driver.find_element_by_tag_name('body')
-el = driver.find_element("name", "q")
-# search_box = driver.find_element("name", "q")
-
+# el = driver.find_element_by_class_name("rf-productlocator-buttontitle")
+buttons = driver.find_element(By.XPATH,'//button[@class="rf-pickup-quote-overlay-trigger as-buttonlink"]')
+driver.execute_script("arguments[0].click();", buttons)
+time.sleep(5)
+el = driver.find_element(By.XPATH, '//span[@class="rf-productlocator-buttontitle"]')
 # search_box.send_keys('ChromeDriver')
 
 # search_box.submit()
 str = el.text 
+print(str)
 if(str.find("Currently unavailable.") != -1):
     print("It's still not available my guy")
 # else: 
